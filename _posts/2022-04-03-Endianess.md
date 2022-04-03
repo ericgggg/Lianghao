@@ -33,6 +33,7 @@ Some IBM machines use Big-endian format, meaning they will treat byte stored at 
 the output of it on a Little-endian machine will be 3232235521.
 
 Note: You can run a small piece of code to check the endianness your machine has:
+
     #include <stdio.h>
     int main() 
     {
