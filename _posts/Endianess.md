@@ -4,7 +4,7 @@ title: Endianness and Byte Order
 cover-img: /assets/img/Endianness.png
 thumbnail-img: /assets/img/thumb.png
 share-img: /assets/img/path.jpg
-tags: [books, test]
+tags: [Endianness, Big-endian, Little-endian, Network byte order, Host byte order]
 ---
 
 Computers only know 0s and 1s and the minimum unit is Byte, which is 8 bits. Endianness is how things are stored in memory or read by the computer.
