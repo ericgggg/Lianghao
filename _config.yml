@@ -15,9 +15,6 @@ author: Eric Gao
 
 navbar-links:
   About Me: "aboutme"
-  My Post:
-    - Beautiful Jekyll: "https://beautifuljekyll.com"
-  Author's home: "https://deanattali.com"
 
 # --- Logo --- #
 
