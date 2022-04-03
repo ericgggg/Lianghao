@@ -43,4 +43,14 @@ Note: You can run a small piece of code to check the endianness your machine has
         return 0;
     }
 
-As you can see, there will be problem when machine with different endianness communicating with each other. In networking, in order to solve the problem, the standard is to always use Big-endianness when
+As you can see, there will be problem when machine with different endianness communicating with each other. In networking, in order to solve the problem, the standard is to always use big-endianness when a multibyte data is about to leave the machine to the wire/network. We call it network-byte-order(big-endian), while anything stored on the machine is called host-byte-order(depending on what architecure the machine has, this can be either big-endian on big-endian machines or little-endian on little-endian machines).
+    As an example, an ipv4 address 192.168.0.1, when travelled over the network, is stored as 32 bit integer in big-endian format:
+        192      168      0        1
+        Low memory ----------> High memory
+        11000000 10101000 00000000 00000001
+
+    When the data arrives to a specific local machine, it will be interpret differently.
+    On big-endian machines, which treat lowest byte as the most significant byte, the value will be the same. While on little-endian machines, which treat lowest byte as the most least significant byte, the value will be:
+        00000001 00000000 10101000 11000000, which is 16820416 in decimal instead of 3232235521.
+
+So on little-endian machines, certain action is needed to parse the data received from network into correct host byte order. In C++, we can use ntohl() to do the parsing. Similarly, we also need to call htonl() on little endian machines to parse the data from host byte into network byte order before sending it to wire/network.
