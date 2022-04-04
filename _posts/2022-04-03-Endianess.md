@@ -53,4 +53,7 @@ As you can see, there will be problem when machine with different endianness com
     On big-endian machines, which treat lowest byte as the most significant byte, the value will be the same. While on little-endian machines, which treat lowest byte as the most least significant byte, the value will be:
         00000001 00000000 10101000 11000000, which is 16820416 in decimal instead of 3232235521.
 
-So on little-endian machines, certain action is needed to parse the data received from network into correct host byte order. In C++, we can use ntohl() to do the parsing. Similarly, we also need to call htonl() on little endian machines to parse the data from host byte into network byte order before sending it to wire/network.
+    It's a little bit more tricky for ipv6 addresses, which is a 128-bit data. The network byte order of ipv6 address: 2001:0db8:85a3:0000:0000:8a2e:0370:7334 will be:
+        00100000 00000001 00001101 10111000 10000101 10100011 00000000 00000000 00000000 00000000 10001010 00101110 00000011 01110000 01110011 00110100
+
+So on little-endian machines, certain action is needed to parse the data received from network into correct host byte order. In C++, we can use ntohl() to do the parsing. Similarly, we also need to call htonl() on little endian machines to parse the data from host byte into network byte order before sending it to wire/network. In C++, there is no built-in functions that can convert the byte order of ipv6 address. So you need to manually convert it using bit shifting machanism.
